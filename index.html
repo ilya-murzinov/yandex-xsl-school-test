@@ -26,6 +26,59 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
+      <h2>Problem 1</h2>
+      <pre>
+/*
+Parse URL into object.
+*/
+var toObject = function(url) {
+    var parameters = url.split('?')[1];
+    if (parameters != '') {
+        var result = {};
+        var keyValue = parameters.split('&');
+        for (i = 0; i < keyValue.length; i++) {
+            var key = keyValue[i].split('=')[0];
+            var value = keyValue[i].split('=').splice(1, keyValue.length).join('=');
+            result[key] = value;
+        }
+        return result;
+    }
+}
+      </pre>
+      <h2>Problem 2</h2>
+      <pre>
+/*
+Serialize object to query.
+*/
+var toQuery = function(object) {
+    var result = [];
+    for (var key in object) {
+        if (object.hasOwnProperty(key)) {
+            result.push(key + '=' + object[key]);
+        }
+    }
+    return result.join('&');
+}
+
+/*
+Add query to URL.
+Parameter replaceExisting is true by default.
+*/
+var addQuery = function(baseUrl, query, replaceExisting) {
+    if (replaceExisting || typeof(replaceExisting) == 'undefined') {
+        baseUrl = baseUrl.split('?')[0].concat('?' + query);
+        return baseUrl + query;
+    } else {
+        baseUrl = baseUrl.concat('&' + query);
+        return baseUrl + query;
+    }
+}
+      </pre>
+      
+      <p>
+      <a href="http://jsfiddle.net/aurn5/1/">Demo on JSFiddle</a>
+      </p>
+      
       </section>
     </div>
 
