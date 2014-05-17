@@ -7,12 +7,13 @@
     <meta name="description" content="Yandex-xsl-school-test : " />
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    
+    <script type="text/javascript" src="javascripts/main.js"></script>
 
     <title>Yandex-xsl-school-test</title>
   </head>
 
   <body>
-
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
         <header class="inner">
@@ -24,37 +25,51 @@
     </div>
 
     <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-      <h2>Problem 1</h2>
-      <pre>
+	<div id="main_content_wrap" class="outer">
+		<section id="main_content" class="inner">
+			<h3><a href="javascript:void(0);" onClick="toggleProblem(1);">Problem 1</a></h3>
+			<div class="hidden" id="problem1">
+			   <div class="field">
+				  <label for="url">First name</label>
+				  <input type="text" id="url" class="url" value="http://moto1.englearn.org/index.php?route=product/product==&path=59&product_id=50"/>
+			   </div>
+				<input type="submit" value="Parse" onClick="showParsedUrl();"/>
+				<div class="result" id="result">					
+				</div>
+				<p><a href="javascript:void(0);" onClick="showCode(1);">Show Code</a></p>
+				<div class="hidden" id="code1">
+					<pre>
 /*
 Parse URL into object.
 */
-var toObject = function(url) {
+function toObject(url) {
     var parameters = url.split('?')[1];
     if (parameters != '') {
         var result = {};
         var keyValue = parameters.split('&');
         for (i = 0; i < keyValue.length; i++) {
             var key = keyValue[i].split('=')[0];
-            var value =
-              keyValue[i].split('=').splice(1, keyValue.length).join('=');
+            var value = 
+            	keyValue[i].split('=').splice(1, keyValue.length).join('=');
             result[key] = value;
         }
         return result;
     }
-}
-      </pre>
-      <p>
-        <a href="http://jsfiddle.net/wCAe7/">Demo on JSFiddle</a>
-      </p>
-      <h2>Problem 2</h2>
-      <pre>
+};
+					</pre>
+				</div>
+			</div>
+			
+			<hr/>
+			
+			<h3><a href="javascript:void(0);" onClick="toggleProblem(2);">Problem 2</a></h3>
+			<div class="hidden" id="problem2">
+				<div id="code2">
+					<pre>
 /*
 Serialize object to query.
 */
-var toQuery = function(object) {
+function toQuery(object) {
     var result = [];
     for (var key in object) {
         if (object.hasOwnProperty(key)) {
@@ -62,13 +77,13 @@ var toQuery = function(object) {
         }
     }
     return result.join('&');
-}
+};
 
 /*
 Add query to URL.
 Parameter replaceExisting is true by default.
 */
-var addQuery = function(baseUrl, query, replaceExisting) {
+function addQuery(baseUrl, query, replaceExisting) {
     if (replaceExisting || typeof(replaceExisting) == 'undefined') {
         baseUrl = baseUrl.split('?')[0].concat('?' + query);
         return baseUrl + query;
@@ -76,14 +91,101 @@ var addQuery = function(baseUrl, query, replaceExisting) {
         baseUrl = baseUrl.concat('&' + query);
         return baseUrl + query;
     }
-}
-      </pre>
-      
-      <p>
-        <a href="http://jsfiddle.net/aurn5/1/">Demo on JSFiddle</a>
-      </p>
-      
-      </section>
+};		
+					</pre>
+				</div>
+			</div>
+			
+			<hr/>
+			
+			<h3><a href="javascript:void(0);" onClick="toggleProblem(3);">Problem 3</a></h3>
+			<div class="hidden" id="problem3">
+				<form id="form1" onSubmit="return equateForms();">
+				   <div class="field">
+					  <label for="firstName1">First name</label>
+					  <input type="text" id="firstName1" />
+				   </div>
+				   <div class="field">
+					  <label for="lastName1">Last name</label>
+					  <input type="text" id="lastName1" />
+				   </div>
+				   <div class="field">
+					  <label for="login">Login</label>
+					  <input type="text" id="login" />
+				   </div>
+				   <input type="submit" value="Equate"/>
+				</form>
+				<form id="form2" onSubmit="return compareForms();">
+				   <div class="field">
+					  <label for="firstName2">First name</label>
+					  <input type="text" id="firstName2" />
+				   </div>
+				   <div class="field">
+					  <label for="lastName2">Last name</label>
+					  <input type="text" id="lastName2" />
+				   </div>
+				   <div class="field">
+					  <label for="email">E-mail</label>
+					  <input type="text" id="email" />
+				   </div>
+				   <input type="submit" value="Compare"/>
+				</form>
+				<div class="result" id="comparationResult">
+				</div>
+				<p><a href="javascript:void(0);" onClick="showCode(3);">Show Code</a></p>
+				<div class="hidden" id="code3">
+					<pre>
+/*
+Compare pair of objects.
+*/
+function compare(form1, form2) {
+    var result = {};
+    for (var parameter in form1) {
+        if (form1.hasOwnProperty(parameter)) {
+            if (typeof(form2[parameter]) != 'undefined') {
+                if (form1[parameter] == form2[parameter]) {
+                    delete form1[parameter];
+                    delete form2[parameter];
+                } else {
+                    result[parameter] = {
+                        'status': 'changed',
+                        'oldValue': form1[parameter],
+                        'newValue': form2[parameter]
+                    };
+                }
+            } else {
+                result[parameter] = {
+                    'status': 'removed',
+                    'value': form1[parameter]
+                };
+            }
+        }        
+    }
+    for (var parameter in form2) {
+        if (form2.hasOwnProperty(parameter)) {
+            if (typeof(form1[parameter]) == 'undefined') {
+                result[parameter] = {
+                    'status': 'added',
+                    'value': form2[parameter]
+                };
+            }
+        }
+    }
+    return result;
+};
+
+/*
+Compare pair of queries.
+*/
+function compareQueries(query1, query2) {
+    var form1 = toObject(query1);
+    var form2 = toObject(query2);
+    return compare(form1, form2);
+};
+					</pre>
+				</div>
+			</div>
+		</section>
     </div>
 
     <!-- FOOTER  -->

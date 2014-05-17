@@ -5,6 +5,25 @@ by Jason Costello, @jsncostello
 
 @import url(pygment_trac.css);
 
+/********************************************************************************
+Custom styles
+********************************************************************************/
+
+div.hidden {
+    display: none;
+}
+
+input.url {
+	width: 100%;
+}
+
+.result {
+	background: #FFF;
+}
+
+.field {clear:both; text-align:right; line-height:25px;}
+label {float:left; padding-right:10px;}
+
 /*******************************************************************************
 MeyerWeb Reset
 *******************************************************************************/
