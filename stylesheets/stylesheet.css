@@ -21,8 +21,37 @@ input.url {
 	background: #FFF;
 }
 
-.field {clear:both; text-align:right; line-height:25px;}
-label {float:left; padding-right:10px;}
+.field {
+	clear:both;
+	text-align:right;
+	line-height:25px;
+}
+
+label {
+	float:left;
+	padding-right:10px;
+}
+
+div.solution4 {
+	display: table;
+    height: 400px;
+    background: url(http://wmz1.kz/images/yadbig.jpg);
+    background-size: 100% 100%;
+}
+
+.centered-container {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.transparent {
+	width: 40%;
+    margin: auto;
+    font: arial;
+    font-weight: bold;
+    background: rgba(255,255,255,.7);
+    border: 10px solid rgba(0,0,255,.3);
+}
 
 /*******************************************************************************
 MeyerWeb Reset
