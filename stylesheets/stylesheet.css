@@ -21,6 +21,10 @@ input.url {
 	background: #FFF;
 }
 
+form {
+	width: 50%;
+}
+
 .field {
 	clear:both;
 	text-align:right;
@@ -52,6 +56,29 @@ div.solution4 {
     background: rgba(255,255,255,.7);
     border: 10px solid rgba(0,0,255,.3);
 }
+
+.solution5 {
+	display:table;
+    background: url(http://wmz1.kz/images/yadbig.jpg);
+    background-size: 100% 100%;
+}
+
+.rowDiv {
+  	display:table-row;
+  	margin: 10px;
+}
+.cellDiv {
+	display: table-cell;
+	width:15%;
+	padding: 1px;
+	text-align: center;
+}
+
+.text {
+    background: #F0F2F1;
+    border: 5px solid #3B576F;
+}
+
 
 /*******************************************************************************
 MeyerWeb Reset
